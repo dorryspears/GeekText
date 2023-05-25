@@ -21,4 +21,8 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.get('/rating', async (req, res) => {
+    res.sendStatus(200)
+})
+
 module.exports = router;
