@@ -20,7 +20,8 @@ router.post('/', async (req, res) => {
         res.status(400).json({ message: err.message })
     }
 })
-
-//dsjfdsklfjdsklfsjdkalfsad
+router.get('/rating', async (req, res) => {
+    res.sendStatus(200)
+})
 
 module.exports = router;
