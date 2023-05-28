@@ -45,7 +45,6 @@ router.put('/discount', async (req, res) => {
 
 
 
-router.get('/test', async (req, res) => {
-    res.send('Hello')
-});
+
+
 module.exports = router;
