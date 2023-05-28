@@ -23,11 +23,29 @@ router.post('/', async (req, res) => {
 
 
 
-router.post('/discount', async (req, res) => {
-    res.send('Test')
+router.put('/discount', async (req, res) => {
+    const { discountPercent, publisher } = req.body;
+
+    if (!discountPercent || !publisher) {
+        return res.status(400).send({ error: 'Discount percent and Publisher are required' });
+    }
+
+    const discountFactor = 1 - discountPercent / 100;
+
+    try {
+        await Book.updateMany({ publisher: publisher }, { $mul: { price: discountFactor } });
+        res.status(200).send('Updated Successfully');
+    } catch (error) {
+        res.status(500).send({ error: 'An error occurred while updating the book prices' });
+    }
+
+
+
 })
 
 
 
-
+router.get('/test', async (req, res) => {
+    res.send('Hello')
+});
 module.exports = router;
