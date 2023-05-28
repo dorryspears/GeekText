@@ -21,4 +21,13 @@ router.post('/', async (req, res) => {
     }
 })
 
+
+
+router.post('/discount', async (req, res) => {
+    res.send('Test')
+})
+
+
+
+
 module.exports = router;
