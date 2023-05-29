@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
     
     })
 
-router.get('/ratings/:bookID/average', (req, res) => {
+    router.get('/ratings/:bookID/average', (req, res) => {
     const bookID = req.params.bookID;
     
     const bookRatings = ratings.filter(rating => rating.bookID === bookID);
