@@ -19,7 +19,8 @@ router.post('/', async (req, res) => {
     catch (err) {
         res.status(400).json({ message: err.message })
     }
-})
+    
+    })
 
 router.get('/ratings/:bookID/average', (req, res) => {
     const bookID = req.params.bookID;
@@ -30,7 +31,7 @@ router.get('/ratings/:bookID/average', (req, res) => {
     
     res.json(averageRating);
 
-})
+    })
 
 
 module.exports = router;
