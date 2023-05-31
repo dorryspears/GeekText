@@ -55,6 +55,13 @@ router.put('/discount', async (req, res) => {
 
 })
 
+
+router.get('/topsellers', async (req, res) => {
+
+    const books = await Book.find({},[], {skip:0, limit:10, sort: {copiesSold: -1}})
+    res.send(books);
+})
+
 router.get('/genre', async (req, res) => 
 { 
     res.send('Test')
@@ -72,5 +79,6 @@ router.get('/genre', async (req, res) =>
         res.status(500).json({ error: 'Failed to retrieve books' });
     }
 });
+
 
 module.exports = router;
