@@ -19,7 +19,20 @@ router.post('/', async (req, res) => {
     catch (err) {
         res.status(400).json({ message: err.message })
     }
-})
+    
+    })
+
+    router.get('/ratings/:bookID/average', (req, res) => {
+    const bookID = req.params.bookID;
+    
+    const bookRatings = ratings.filter(rating => rating.bookID === bookID);
+
+    const sum = bookRatings.reduce((total, rating) => total + rating.rating, 0);
+    
+    res.json(averageRating);
+
+    })
+
 
 
 router.put('/discount', async (req, res) => {
