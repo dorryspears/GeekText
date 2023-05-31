@@ -21,4 +21,24 @@ router.post('/', async (req, res) => {
     }
 })
 
+//TODO
+router.get('/genre', async (req, res) => 
+{ 
+    res.send('GitTest') // Test with Postman
+    
+    try
+    {
+        const genreData = req.body.genre; 
+        const books = (await Book.find({ genre : genreData })).values
+        const data = books.map 
+        res.json(books);
+    }
+    catch (err)
+    {
+        console.error('Error retrieving books:', err);
+        res.status(500).json({ error: 'Failed to retrieve books' });
+    }
+    
+});
+
 module.exports = router;
