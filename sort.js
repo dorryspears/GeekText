@@ -19,19 +19,19 @@ router.post('/', async (req, res) => {
     catch (err) {
         res.status(400).json({ message: err.message })
     }
-    
-    })
 
-    router.get('/ratings/:bookID/average', (req, res) => {
+})
+
+router.get('/ratings/:bookID/average', (req, res) => {
     const bookID = req.params.bookID;
-    
+
     const bookRatings = ratings.filter(rating => rating.bookID === bookID);
 
     const sum = bookRatings.reduce((total, rating) => total + rating.rating, 0);
-    
+
     res.json(averageRating);
 
-    })
+})
 
 
 
@@ -51,30 +51,25 @@ router.put('/discount', async (req, res) => {
         res.status(500).send({ error: 'An error occurred while updating the book prices' });
     }
 
-
-
 })
 
 
 router.get('/topsellers', async (req, res) => {
 
-    const books = await Book.find({},[], {skip:0, limit:10, sort: {copiesSold: -1}})
+    const books = await Book.find({}, [], { skip: 0, limit: 10, sort: { copiesSold: -1 } })
     res.send(books);
 })
 
-router.get('/genre', async (req, res) => 
-{ 
+router.get('/genre', async (req, res) => {
     res.send('Test')
-    
-    try
-    {
-        const genre = req.params.genre; 
+
+    try {
+        const genre = req.params.genre;
         const booksCollection = db.collection('books');
         const books = await booksCollection.find({ genre }).toArray();
         res.json(books);
     }
-    catch (err)
-    {
+    catch (err) {
         console.error('Error retrieving books:', err);
         res.status(500).json({ error: 'Failed to retrieve books' });
     }
