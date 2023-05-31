@@ -21,7 +21,27 @@ router.post('/', async (req, res) => {
     }
 })
 
-//TODO
+
+router.put('/discount', async (req, res) => {
+    const { discountPercent, publisher } = req.body;
+
+    if (!discountPercent || !publisher) {
+        return res.status(400).send({ error: 'Discount percent and Publisher are required' });
+    }
+
+    const discountFactor = 1 - discountPercent / 100;
+
+    try {
+        await Book.updateMany({ publisher: publisher }, { $mul: { price: discountFactor } });
+        res.status(200).send('Updated Successfully');
+    } catch (error) {
+        res.status(500).send({ error: 'An error occurred while updating the book prices' });
+    }
+
+
+
+})
+
 router.get('/genre', async (req, res) => 
 { 
     res.send('Test')
@@ -39,6 +59,5 @@ router.get('/genre', async (req, res) =>
         res.status(500).json({ error: 'Failed to retrieve books' });
     }
 });
-
 
 module.exports = router;
