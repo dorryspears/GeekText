@@ -22,7 +22,6 @@ router.post('/', async (req, res) => {
 })
 
 
-
 router.put('/discount', async (req, res) => {
     const { discountPercent, publisher } = req.body;
 
@@ -43,8 +42,22 @@ router.put('/discount', async (req, res) => {
 
 })
 
-
-
-
+router.get('/genre', async (req, res) => 
+{ 
+    res.send('Test')
+    
+    try
+    {
+        const genre = req.params.genre; 
+        const booksCollection = db.collection('books');
+        const books = await booksCollection.find({ genre }).toArray();
+        res.json(books);
+    }
+    catch (err)
+    {
+        console.error('Error retrieving books:', err);
+        res.status(500).json({ error: 'Failed to retrieve books' });
+    }
+});
 
 module.exports = router;
