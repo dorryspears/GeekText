@@ -60,20 +60,24 @@ router.get('/topsellers', async (req, res) => {
     res.send(books);
 })
 
-router.get('/genre', async (req, res) => {
-    res.send('Test')
-
-    try {
-        const genre = req.params.genre;
-        const booksCollection = db.collection('books');
-        const books = await booksCollection.find({ genre }).toArray();
+//TODO
+router.get('/genre', async (req, res) => 
+{ 
+    res.send('GitTest') // Test with Postman
+    
+    try
+    {
+        const genreData = req.body.genre; 
+        const books = (await Book.find({ genre : genreData })).values
+        const data = books.map 
         res.json(books);
     }
-    catch (err) {
+    catch (err)
+    {
         console.error('Error retrieving books:', err);
         res.status(500).json({ error: 'Failed to retrieve books' });
     }
+    
 });
-
 
 module.exports = router;
