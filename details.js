@@ -51,13 +51,13 @@ routerDetails.post('/random', async (req, res) => {
                 title: faker.lorem.words(),
                 publisher: faker.company.name(),
                 genre: faker.word.words(),
-                rating: faker.number.int(1, 5),
-                copiesSold: faker.number.int(1, 1000),
+                rating: faker.number.int(5),
+                copiesSold: faker.number.int(1000),
                 price: faker.finance.amount(1, 100, 2),
                 bookISBN: faker.number.int(1000000000000, 9999999999999),
                 yearPublished: faker.date.past({ years: 100 }).getFullYear(),
                 //TODO Replace with author id from author table
-                authorId: faker.number.int(1, 100),
+                authorId: faker.number.int(100),
                 description: faker.lorem.paragraph()
             })
         }
