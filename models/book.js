@@ -25,6 +25,22 @@ const bookSchema = new mongoose.Schema({
     price: {
         type: Decimal128,
         required: true
+    },
+    bookISBN: {
+        type: String,
+        required: true
+    },
+    yearPublished: {
+        type: Number,
+        required: true
+    },
+    authorId: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
     }
 })
 
