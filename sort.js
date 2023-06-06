@@ -10,7 +10,7 @@ router.get('/rating', async (req, res) => {
         return res.status(400).send({ error: 'Rating must be between 0 and 5' });
     }
 
-    const books = await Book.find({ rating: rating });
+    const books = await Book.find({ rating: { $gte: rating } });
     res.send(books);
 });
 
