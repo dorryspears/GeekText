@@ -32,7 +32,6 @@ router.put('/discount', async (req, res) => {
 
 })
 
-
 router.get('/topsellers', async (req, res) => {
 
     const books = await Book.find({}, [], { skip: 0, limit: 10, sort: { copiesSold: -1 } })
