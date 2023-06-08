@@ -66,8 +66,6 @@ router.get('/topsellers', async (req, res) => {
     {
         res.status(500).send(error)
     }
-
-    res.send(books);
 })
 
 router.post('/authorpost', async (req, res) =>
