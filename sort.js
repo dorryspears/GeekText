@@ -1,5 +1,6 @@
 const express = require('express');
 const Book = require('./models/book.js');
+const Author = require('./models/author.js');
 
 const router = express.Router()
 
@@ -56,8 +57,39 @@ router.put('/discount', async (req, res) => {
 
 router.get('/topsellers', async (req, res) => {
 
-    const books = await Book.find({}, [], { skip: 0, limit: 10, sort: { copiesSold: -1 } })
+    try {
+        const books = await Book.find({}, [], { skip: 0, limit: 10, sort: { copiesSold: -1 } })
+        res.status(200).send('Retrieved top sellers!')
+    }
+
+    catch (error)
+    {
+        res.status(500).send(error)
+    }
+
     res.send(books);
+})
+
+router.post('/authorpost', async (req, res) =>
+{
+    const author = new Author(
+        {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            biography: req.body.biography,
+            publisher: req.body.publisher
+        })
+
+    try
+    {
+        const newAuthor = await author.save()
+        res.status(201).send(newAuthor)
+    }
+
+    catch (error)
+    {
+        res.status(400).send(error)
+    }
 })
 
 //TODO
