@@ -59,7 +59,7 @@ router.get('/topsellers', async (req, res) => {
 
     try {
         const books = await Book.find({}, [], { skip: 0, limit: 10, sort: { copiesSold: -1 } })
-        res.status(200).send('Retrieved top sellers!')
+        res.status(200).send(books)
     }
 
     catch (error)
