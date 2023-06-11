@@ -86,6 +86,14 @@ routerDetails.post('/random', async (req, res) => {
 })
 
 routerDetails.post('/authorpost', async (req, res) => {
+
+    const authorFound = await Author.findOne({ authorId: req.body.authorId });
+
+    if (authorFound) {
+        res.status(400).send({ error: 'Author already exist' });
+        return;
+    }
+
     const author = new Author(
         {
             authorId: req.body.authorId,
