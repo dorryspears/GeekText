@@ -68,28 +68,6 @@ router.get('/topsellers', async (req, res) => {
     }
 })
 
-router.post('/authorpost', async (req, res) =>
-{
-    const author = new Author(
-        {
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            biography: req.body.biography,
-            publisher: req.body.publisher
-        })
-
-    try
-    {
-        const newAuthor = await author.save()
-        res.status(201).send(newAuthor)
-    }
-
-    catch (error)
-    {
-        res.status(400).send(error)
-    }
-})
-
 //TODO
 router.get('/genre', async (req, res) => 
 { 
