@@ -1,5 +1,6 @@
 const express = require('express');
 const Book = require('./models/book.js');
+const Author = require('./models/author.js');
 
 const router = express.Router()
 
@@ -34,8 +35,15 @@ router.put('/discount', async (req, res) => {
 
 router.get('/topsellers', async (req, res) => {
 
-    const books = await Book.find({}, [], { skip: 0, limit: 10, sort: { copiesSold: -1 } })
-    res.send(books);
+    try {
+        const books = await Book.find({}, [], { skip: 0, limit: 10, sort: { copiesSold: -1 } })
+        res.status(200).send('Retrieved top sellers!')
+    }
+
+    catch (error)
+    {
+        res.status(500).send(error)
+    }
 })
 
 router.get('/genre', async (req, res) => {
