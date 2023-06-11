@@ -151,19 +151,17 @@ routerDetails.post('/authorrandom', async (req, res) => {
 
 routerDetails.get('/listOfBooksByAuthor', async (req, res) => {
     try {
-        const authorId = req.params.authorId;
+        const author = await Author.findOne({ authorId: req.body.authorId });
 
-        // Find the author by their Id
-        const author = await Author.findById(authorId);
 
         if (!author) {
-            return res.status(404).json({ error: 'Author not found' });
+            return res.status(400).json({ error: 'Author not found' });
         }
 
         // Find the books associated with the author
-        const books = await Book.find({ author: authorId });
+        const books = await Book.find({ authorId: req.body.authorId });
 
-        res.json(books);
+        res.status(200).json(books);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Server error' });
