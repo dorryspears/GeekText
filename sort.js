@@ -75,6 +75,23 @@ router.get('/genre', async (req, res) => {
     }
 });
 
+router.get('/isbn', async (req, res) => {
+
+    const isbn = req.body.isbn;
+    
+    try {
+        const book = await Book.findOne({ bookISBN: isbn });
+        if (!book) {
+            res.status(404).json({ message: "Book not found" });
+        } else {
+            res.status(200).json(book);
+        }
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+
+});
+
 
 module.exports = router;
  
