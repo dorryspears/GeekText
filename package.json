@@ -16,5 +16,8 @@
     "mongodb": "^5.5.0",
     "mongoose": "^7.1.1",
     "node-dev": "^8.0.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.0.2"
   }
 }
