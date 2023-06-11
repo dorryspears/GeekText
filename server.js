@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 require('dotenv').config()
 const routes = require('./sort.js');
+const details = require('./details.js');
 const connection_string = process.env.MONGODB_CONNECTION_STRING
 
 mongoose.connect(connection_string)
@@ -21,6 +22,7 @@ const app = express()
 
 app.use(express.json());
 app.use('/sort', routes)
+app.use('/details', details)
 
 app.listen(3000, () => {
     console.log(`Server Started at ${3000}`)
