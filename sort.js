@@ -59,4 +59,8 @@ router.get('/genre', async (req, res) => {
 
 });
 
+router.get('/testHealth', async (req, res) => {
+    res.status(200).send('OK');
+});
+
 module.exports = router;
