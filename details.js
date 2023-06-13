@@ -149,6 +149,26 @@ routerDetails.post('/authorrandom', async (req, res) => {
     }
 })
 
+routerDetails.get('/listOfBooksByAuthor', async (req, res) => {
+    try {
+        const author = await Author.findOne({ authorId: req.body.authorId });
+
+
+        if (!author) {
+            return res.status(400).json({ error: 'Author not found' });
+        }
+
+        // Find the books associated with the author
+        const books = await Book.find({ authorId: req.body.authorId });
+
+        res.status(200).json(books);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
+
 
 routerDetails.get('/isbn', async (req, res) => {
 
