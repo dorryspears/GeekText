@@ -24,4 +24,18 @@ routerProfile.post('/addUser', async (req, res) => {
         });
     });
 
+routerProfile.patch('/updateUser', async (req, res) => {
+
+    try{
+        const userUpdate = await User.findOneAndUpdate({username: req.body.username}, {$set: req.body})
+        res.status(200).send(userUpdate)
+    }
+
+    catch (error)
+    {
+        res.status(500).send(error)
+    }
+
+})
+
 module.exports = routerProfile;
