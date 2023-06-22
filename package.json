@@ -4,7 +4,7 @@
   "description": "CEN 4040",
   "main": "server.js",
   "scripts": {
-    "dev": "node-dev app.js",
+    "dev": "npm install && node-dev app.js",
     "test": "jest"
   },
   "author": "",
