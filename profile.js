@@ -27,8 +27,15 @@ routerProfile.post('/addUser', async (req, res) => {
 routerProfile.patch('/updateUser', async (req, res) => {
 
     try{
-        const userUpdate = await User.findOneAndUpdate({username: req.body.username}, {$set: req.body})
-        res.status(200).send(userUpdate)
+        if (req.body.email)
+        {
+            res.status(400).send({ error: 'You cannot update your E-mail.' });
+            return;
+        }
+
+        const updateUser = await User.findOneAndUpdate({username: req.body.username}, {$set: req.body})
+        const updatedUser = await User.findOne({username: req.body.username})
+        res.status(200).send(updatedUser)
     }
 
     catch (error)
