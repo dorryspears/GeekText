@@ -1,5 +1,6 @@
 const express = require("express");
 const User = require("./models/user.js");
+const CreditCard = require("./models/creditcard.js");
 const routerProfile = express.Router();
 
 routerProfile.post("/addcreditcard", async (req, res) => {
@@ -9,12 +10,17 @@ routerProfile.post("/addcreditcard", async (req, res) => {
     res.sendStatus(400);
     return;
   }
-  res.status(200).send({
+  
+  const creditCard = new CreditCard({
     userName: userName,
     cardHolder: cardHolder,
     cardNumber: cardNumber,
     expirationDate: expirationDate,
     cvv: cvv,
+  });
+
+  creditCard.save().then((data) => {
+    res.status(201).json(data);
   });
 });
 
