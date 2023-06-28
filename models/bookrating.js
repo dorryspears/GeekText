@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const cartSchema = new mongoose.Schema({
+const bookRatingSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true
@@ -9,6 +9,10 @@ const cartSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    rating: {
+        type: Number,
+        required: true
+    }
 });
 
-module.exports = mongoose.model('CartItem', cartSchema)
+module.exports = mongoose.model('BookRating', bookRatingSchema)
