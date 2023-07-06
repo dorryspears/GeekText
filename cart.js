@@ -46,4 +46,27 @@ routerCart.delete("/removeitem", async (req, res) => {
   }
 });
 
+routerCart.get('/username', async (req, res) => 
+{
+    try
+    {
+        const username = req.body.username;
+        const userFound = await User.findOne({ username: username });
+        
+        if (!userFound) 
+        {
+        res.status(400).send({ error: "Does not exist." });
+        return;
+        }
+        res.json(await CartItem.find({ username: username }));   
+        
+    }
+    
+    catch (err)
+    {
+        console.error('Error retrieving books from cart:', err);
+        res.status(500).json({ error: 'Failed to retrieve books from cart' })
+    }
+});
+
 module.exports = routerCart;
