@@ -41,4 +41,29 @@ routerRating.post("/addbookrating", async (req, res) => {
     });
 });
 
+//retrieve average rating for a book
+routerRating.get("/getbookaverage/:isbn", async (req, res) => {
+    const { _id } = req.params;  
+
+//Aggregate ratings and calculate average    
+    const averageRating = await BookRating.aggregate([
+        { $match: { _id } },
+        {
+            $group: {
+                _id: null,
+                avgRating: { $avg: "$rating" },
+            },
+        },
+    ]);  
+
+    if (!averageRating[0]) {
+        res.status(200).json({ avgRating: "No ratings yet for this book." }); //message if no ratings found
+        return;
+    }
+
+    res.status(200).json({ avgRating: averageRating[0].avgRating });
+});
+
+
+
 module.exports = routerRating;
